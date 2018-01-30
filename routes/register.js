@@ -8,8 +8,7 @@ exports.submit = function(req, res, next){
   var data = req.body.user;
   User.getByName(data.name, function(err, user){
     if (err) return next(err);
-
-    if (user.id) {
+    if (user && user.id) {
       res.error("Username already taken!");
       res.redirect('back');
     } else {

@@ -9,6 +9,7 @@
     "bcryptjs": "^2.4.3",
     "ejs": "*",
     "express": "3.x",
+    "mysql": "^2.15.0",
     "redis": "0.7.2"
   }
 }

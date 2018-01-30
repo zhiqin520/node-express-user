@@ -16,6 +16,14 @@ var validate = require('./lib/middleware/validate');
 var page = require('./lib/middleware/page');
 var Entry = require('./lib/entry');
 
+var mysql = require('mysql');
+var db = mysql.createConnection({
+    host:     '127.0.0.1',
+    user:     'root',
+    password: '940327!',
+    database: 'node_express_user'
+});
+
 var app = express();
 
 // all environments
@@ -69,3 +77,29 @@ if (process.env.ERROR_ROUTE) {
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+db.query(
+    "CREATE TABLE IF NOT EXISTS user ("
+    + "id INT(10) NOT NULL AUTO_INCREMENT, "
+    + "name VARCHAR(100) NOT NULL, "
+    + "pass VARCHAR(100) NOT NULL, "
+    + "salt VARCHAR(100) NOT NULL, "
+    + "PRIMARY KEY(id))",
+    function(err) {
+        if (err) throw err;
+        console.log('create table user...');
+    }
+);
+
+db.query(
+    "CREATE TABLE IF NOT EXISTS article ("
+    + "id INT(10) NOT NULL AUTO_INCREMENT, "
+    + "username VARCHAR(100) NOT NULL, "
+    + "title VARCHAR(100) NOT NULL, "
+    + "body VARCHAR(500) NOT NULL, "
+    + "PRIMARY KEY(id))",
+    function(err) {
+        if (err) throw err;
+        console.log('create table article...');
+    }
+);
