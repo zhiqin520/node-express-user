@@ -9,6 +9,8 @@ exports.submit = function(req, res, next){
   User.authenticate(data.name, data.pass, function(err, user){
     if (err) return next(err);
     if (user) {
+      //为认证存储 uid
+      console.log('set uid',user.id)
       req.session.uid = user.id;
       res.redirect('/');
     } else {

@@ -11,7 +11,7 @@ exports.notfound = function(req, res){
     },
     xml: function() {
       res.write('<error>\n');
-      res.write(' <message>Resource not found</message>\n');
+      res.write('<message>Resource not found</message>\n');
       res.end('</error>\n');
     },
     text: function(){

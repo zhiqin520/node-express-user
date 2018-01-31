@@ -36,8 +36,8 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/api', api.auth);
+app.use(express.static(path.join(__dirname, 'public'))); //静态资源服务器
+app.use('/api', api.auth); //挂载点/api
 app.use(user);
 app.use(messages);
 app.use(app.router);
@@ -64,7 +64,7 @@ app.post(
 app.get('/api/user/:id', api.user);
 app.post('/api/entry', entries.submit);
 app.get('/api/entries/:page?', page(Entry.count), api.entries);
-app.get('/:page?', page(Entry.count, 1), entries.list);
+app.get('/:page?', page(Entry.count, 10), entries.list);
 
 if (process.env.ERROR_ROUTE) {
   app.get('/dev/error', function(req, res, next){

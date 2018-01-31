@@ -19,7 +19,8 @@ exports.submit = function(req, res, next){
 
       user.save(function(err){
         if (err) return next(err);
-        req.session.uid = user.id;
+          //为认证存储 uid
+          req.session.uid = user.id;
         res.redirect('/');
       });
     }

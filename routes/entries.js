@@ -1,6 +1,13 @@
 var Entry = require('../lib/entry');
 
 exports.list = function(req, res, next){
+  //中间件session 依赖cookieParser, 签名cookie
+  //connect默认会话cookie名, connect.sid
+  // cookies {}
+  // signedCookies { 'connect.sid': 'ogcC5nD7KsauQGKKOSDg7pm6jopMbrEV' }
+  console.log('cookies', req.cookies)
+  console.log('signedCookies', req.signedCookies)
+
   var page = req.page;
   Entry.getRange(page.from, page.perpage, function(err, entries) {
     if (err) return next(err);
